@@ -33,27 +33,33 @@ const MovieCast = () => {
     <>
       {isError && <ErrorMessage />}
       {isLoading && <Loader />}
-      <ul className={css.castList}>
-        {casts.map((cast) => {
-          return (
-            <li key={cast.cast_id} className={css.castListItem}>
-              <img
-                className={css.castImg}
-                src={
-                  cast.profile_path
-                    ? `https://image.tmdb.org/t/p/w200${cast.profile_path}`
-                    : defaultAvatar
-                }
-                alt={cast.name}
-              />
-              <div className={css.infoContainer}>
-                <p className={css.castName}>{cast.name}</p>
-                <p className={css.castCharacter}>Character: {cast.character}</p>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      {casts.length > 0 ? (
+        <ul className={css.castList}>
+          {casts.map((cast) => {
+            return (
+              <li key={cast.cast_id} className={css.castListItem}>
+                <img
+                  className={css.castImg}
+                  src={
+                    cast.profile_path
+                      ? `https://image.tmdb.org/t/p/w200${cast.profile_path}`
+                      : defaultAvatar
+                  }
+                  alt={cast.name}
+                />
+                <div className={css.infoContainer}>
+                  <p className={css.castName}>{cast.name}</p>
+                  <p className={css.castCharacter}>
+                    Character: {cast.character}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p className={css.castName}>There are no casts</p>
+      )}
     </>
   );
 };

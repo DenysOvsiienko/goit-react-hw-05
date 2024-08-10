@@ -33,39 +33,44 @@ const MovieReviews = () => {
     <>
       {isError && <ErrorMessage />}
       {isLoading && <Loader />}
-      <ul className={css.reviewList}>
-        {reviews.map((review) => {
-          return (
-            <li key={review.id} className={css.reviewListItem}>
-              <img
-                className={css.reviewImg}
-                src={
-                  review.author_details.avatar_path
-                    ? `https://image.tmdb.org/t/p/w200${review.author_details.avatar_path}`
-                    : defaultAvatar
-                }
-                alt={review.author}
-              />
-              <div className={css.infoContainer}>
-                <p className={css.reviewAuthor}>
-                  {review.author}&nbsp;
-                  <span>
-                    (user rating:&nbsp;
-                    {review.author_details.rating
-                      ? review.author_details.rating
-                      : "unrated"}
-                    )
-                  </span>
-                </p>
-                <p className={css.reviewPublishDate}>
-                  Created at: {Moment(review.created_at).format("MMMM Do YYYY")}
-                </p>
-                <p className={css.reviewContent}>{review.content}</p>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      {reviews.length > 0 ? (
+        <ul className={css.reviewList}>
+          {reviews.map((review) => {
+            return (
+              <li key={review.id} className={css.reviewListItem}>
+                <img
+                  className={css.reviewImg}
+                  src={
+                    review.author_details.avatar_path
+                      ? `https://image.tmdb.org/t/p/w200${review.author_details.avatar_path}`
+                      : defaultAvatar
+                  }
+                  alt={review.author}
+                />
+                <div className={css.infoContainer}>
+                  <p className={css.reviewAuthor}>
+                    {review.author}&nbsp;
+                    <span>
+                      (user rating:&nbsp;
+                      {review.author_details.rating
+                        ? review.author_details.rating
+                        : "unrated"}
+                      )
+                    </span>
+                  </p>
+                  <p className={css.reviewPublishDate}>
+                    Created at:{" "}
+                    {Moment(review.created_at).format("MMMM Do YYYY")}
+                  </p>
+                  <p className={css.reviewContent}>{review.content}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p className={css.reviewAuthor}>There are no reviews</p>
+      )}
     </>
   );
 };

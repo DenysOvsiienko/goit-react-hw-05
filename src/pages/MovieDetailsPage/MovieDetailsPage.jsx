@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { HiArrowLeft } from "react-icons/hi";
 import { getMovieDetails } from "../../js/tmdb-api";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense, useRef } from "react";
 import Moment from "moment";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loader from "../../components/Loader/Loader";
@@ -25,7 +25,7 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const backLinkHref = location.state ?? "/";
+  const backLinkHref = useRef(location.state ?? "/");
 
   useEffect(() => {
     async function getMovieDetailsData() {
@@ -45,7 +45,7 @@ const MovieDetailsPage = () => {
 
   return (
     <main>
-      <Link to={backLinkHref} className={css.goBackBtn}>
+      <Link to={backLinkHref.current} className={css.goBackBtn}>
         <HiArrowLeft size="24" />
         Go Back
       </Link>
@@ -63,11 +63,15 @@ const MovieDetailsPage = () => {
           alt={movie.title}
         />
         <div className={css.movieDetailsDescription}>
-          <p className={css.aboutText}>
-            <span className={css.aboutSpan}>About {movie.title}</span>:
-            <br />
-            {movie.overview}
-          </p>
+          <h3 className={css.aboutTitle}>About {movie.title}</h3>
+          <p className={css.aboutText}>{movie.overview}</p>
+          <h3 className={css.aboutTitle}>Genres</h3>
+          <ul className={css.genresList}>
+            {movie?.genres?.map(({ id, name }) => (
+              <li key={id}>{name}, </li>
+            ))}
+          </ul>
+          <p className={css.releaseDate}>User rating: {movie.vote_average}</p>
           <p className={css.releaseDate}>
             Release Date: {Moment(movie.release_date).format("MMMM Do YYYY")}
           </p>
