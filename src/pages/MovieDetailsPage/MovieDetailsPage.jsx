@@ -68,7 +68,7 @@ const MovieDetailsPage = () => {
           <h3 className={css.aboutTitle}>Genres</h3>
           <ul className={css.genresList}>
             {movie?.genres?.map(({ id, name }) => (
-              <li key={id}>{name}, </li>
+              <li key={id}>{name}, &nbsp;</li>
             ))}
           </ul>
           <p className={css.releaseDate}>User rating: {movie.vote_average}</p>
