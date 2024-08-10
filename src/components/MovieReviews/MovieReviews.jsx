@@ -48,8 +48,14 @@ const MovieReviews = () => {
               />
               <div className={css.infoContainer}>
                 <p className={css.reviewAuthor}>
-                  {review.author}{" "}
-                  <span>(user rating: {review.author_details.rating})</span>
+                  {review.author}&nbsp;
+                  <span>
+                    (user rating:&nbsp;
+                    {review.author_details.rating
+                      ? review.author_details.rating
+                      : "unrated"}
+                    )
+                  </span>
                 </p>
                 <p className={css.reviewPublishDate}>
                   Created at: {Moment(review.created_at).format("MMMM Do YYYY")}

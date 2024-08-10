@@ -1,5 +1,6 @@
 import { getMovieByQuery } from "../../js/tmdb-api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import toast from "react-hot-toast";
 import MovieList from "../../components/MovieList/MovieList";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loader from "../../components/Loader/Loader";
@@ -18,6 +19,7 @@ const MoviesPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const query = searchParams.get("query") ?? "";
   const page = searchParams.get("page") ?? "";
+  const mainElemRef = useRef();
 
   useEffect(() => {
     if (query === "") return;
@@ -26,6 +28,10 @@ const MoviesPage = () => {
         setIsError(false);
         setIsLoading(true);
         const data = await getMovieByQuery(query, page);
+        if (data.results.length === 0) {
+          toast("No matches found. Please check your query.");
+          return;
+        }
         setFoundMovies(data.results);
         setTotalPages(data.total_pages);
         setIsLoadMore(data.total_pages >= page);
@@ -51,8 +57,16 @@ const MoviesPage = () => {
     setSearchParams({ query, page: newPage });
   };
 
+  useEffect(() => {
+    if (page === 1) return;
+    mainElemRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [foundMovies, page]);
+
   return (
-    <>
+    <div ref={mainElemRef}>
       <MovieSearchForm onSearch={handleSearch} />
       {isError && <ErrorMessage />}
       {isLoading && <Loader />}
@@ -73,7 +87,7 @@ const MoviesPage = () => {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
