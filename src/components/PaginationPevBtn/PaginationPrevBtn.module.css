@@ -1,0 +1,13 @@
+.paginationBtn {
+  background-color: var(--default-accent-color);
+  transition: background-color 250ms linear;
+  border-radius: 4px;
+  width: 110px;
+  padding: 6px 12px;
+}
+
+.paginationBtn:hover,
+.paginationBtn:focus-visible,
+.paginationBtn:active {
+  background-color: var(--default-accent-hover-color);
+}

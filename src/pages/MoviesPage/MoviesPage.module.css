@@ -1,0 +1,6 @@
+.paginationBtnContainer {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 24px 0;
+}

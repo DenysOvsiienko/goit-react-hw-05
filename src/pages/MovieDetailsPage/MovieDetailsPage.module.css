@@ -1,0 +1,76 @@
+.goBackBtn {
+  display: inline-flex;
+  font-weight: 500;
+  gap: 4px;
+  border-radius: 4px;
+  background-color: var(--default-accent-color);
+  transition: background-color 250ms linear;
+  padding: 6px 12px;
+}
+
+.goBackBtn:hover,
+.goBackBtn:focus-visible,
+.goBackBtn:active {
+  background-color: var(--default-accent-hover-color);
+}
+
+.title {
+  font-size: 28px;
+  color: var(--default-accent-color);
+  margin-bottom: 8px;
+}
+
+.movieDetailsContainer {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.PosterImg {
+  width: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.movieDetailsDescription {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+
+.aboutText {
+  color: var(--text-color2);
+  margin-bottom: 8px;
+}
+
+.aboutSpan {
+  color: var(--default-text-color);
+  font-weight: 500;
+}
+
+.releaseDate {
+  color: var(--default-text-color);
+}
+
+.nestedRoutesList {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.link {
+  color: var(--default-accent-color);
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 100ms linear;
+}
+
+.link:hover,
+.link:focus-visible,
+.link:active {
+  color: #b1eb61;
+}
+
+.active {
+  color: #b1eb61;
+}
